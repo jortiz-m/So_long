@@ -6,23 +6,22 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:11:38 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/12 14:11:52 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:24:51 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void map_validation(t_game *game, char *map_file)
-{    
-	/* printf("%s\n", game->map[0]); */
+void	map_validation(t_game *game, char *map_file)
+{
 	validate_extension(map_file);
-    set_map(game, map_file);
-    validate_edges(game->map);
-    validate_body(game->map, &game->entities);
-    find_player(game->map, &game->player_pos);
-    reachable_entities(game->map, game->entities, game->player_pos);
+	set_map(game, map_file);
+	validate_edges(game->map);
+	validate_body(game->map, &game->entities);
+	find_player(game->map, &game->player_pos);
+	reachable_entities(game->map, game->entities, game->player_pos);
 	set_map_dimension(game);
-    /* free_matrix(game->map); */
+	set_move_counter(game);
 }
 
 void	validate_extension(char *map)

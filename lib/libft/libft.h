@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:28:33 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/12 10:25:41 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:03:10 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,20 @@
 # include <string.h>
 # include <stddef.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 # ifndef BUFFER_SIZE
 # define BUFFER_SIZE 10
 # endif
 
+char	*get_next_line(int fd);
+char	*ft_read(int fd, char *rest);
+char	*ft_createline(char *buffer);
+char	*ft_createrest(char *buffer);
+
+char	**create_matrix(int n);
+void	free_matrix(char **matrix);
+int		matrixlen(char **matrix);
 /**
  * @brief 
  * 
@@ -221,7 +230,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
  * @param s2 
  * @return char* 
  */
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, const char *s2);
 /**
  * @brief 
  * 

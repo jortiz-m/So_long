@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 12:45:26 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/25 13:29:11 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/11/12 10:58:23 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/26 11:21:35 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-size_t	ft_strlen(const char *str)
+int	main(int ac, char **av)
 {
-	size_t	c;
+	t_game	game;
 
-	c = 0;
-	while (str[c] != '\0')
-		c++;
-	return (c);
+	if (ac == 2)
+	{
+		map_validation(&game, av[1]);
+		init_mlx(&game);
+		init_sprite(&game);
+		render_map(&game);
+		hooks_mlx(&game);
+		mlx_loop(game.mlx);
+	}
+	else
+		error_msg("Enter valid argument");
+	return (0);
 }

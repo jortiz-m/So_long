@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 12:45:26 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/25 13:29:11 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/11/25 12:28:42 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/25 12:28:50 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	error_msg(char *msg)
 {
-	size_t	c;
-
-	c = 0;
-	while (str[c] != '\0')
-		c++;
-	return (c);
+	ft_putendl_fd(msg, 2);
+	exit(EXIT_FAILURE);
 }
