@@ -5,22 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 13:51:28 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/12 11:56:26 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/10 10:36:09 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/10 10:36:27 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *str, int c, size_t len)
+void	*ft_memset(void *ptr, int value, size_t n)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
-		((unsigned char *)str)[i] = (unsigned char)c;
+		((unsigned char *)ptr)[i] = (unsigned char)value;
 		i++;
 	}
-	return (str);
+	return (ptr);
 }
+
+/*
+- We've used size_t to compare "i" with "n".
+- Cast void pointer to unsigned char because unsigned char byte size
+is 1, and it goes from 0 to 255, including all ASCII characters.
+*/

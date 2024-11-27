@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 12:11:40 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/29 12:28:03 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/25 14:02:06 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/29 15:09:45 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
-	{
-		lst = lst->next;
-	}
+	if (lst != NULL)
+		while (lst->next != NULL)
+			lst = lst->next;
 	return (lst);
 }

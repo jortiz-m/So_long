@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 14:11:38 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/25 10:24:51 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/11/04 11:21:46 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	map_validation(t_game *game, char *map_file)
 {
 	validate_extension(map_file);
 	set_map(game, map_file);
-	validate_edges(game->map);
-	validate_body(game->map, &game->entities);
+	validate_edges(*game);
+	validate_body(*game, &game->entities);
 	find_player(game->map, &game->player_pos);
-	reachable_entities(game->map, game->entities, game->player_pos);
+	reachable_entities(game, game->entities, game->player_pos);
 	set_map_dimension(game);
 	set_move_counter(game);
 }
@@ -61,5 +61,27 @@ char	*process_txt(int fd)
 		free(gnl_line);
 		gnl_line = get_next_line(fd);
 	}
+	check_line(super_line);
 	return (super_line);
+}
+
+void	check_line(char *super_line)
+{
+	int	i;
+
+	i = 0;
+	while (super_line[i])
+	{
+		if (super_line[i] != WALL \
+		&& super_line[i] != PLAYER \
+		&& super_line[i] != EXIT \
+		&& super_line[i] != FLOOR \
+		&& super_line[i] != COIN \
+		&& super_line[i] != '\n')
+		{
+			free(super_line);
+			error_msg("Error: invalid map format");
+		}
+		i++;
+	}
 }

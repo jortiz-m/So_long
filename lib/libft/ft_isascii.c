@@ -5,16 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 12:38:31 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/11 10:49:04 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/09 11:13:20 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/09 11:14:31 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
+	if (c <= 127 && c >= 0)
 		return (1);
-	return (0);
+	else
+		return (0);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 12:40:56 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/25 12:41:07 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/11/18 14:23:55 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,24 @@
 int	handle_input(int key, t_game *game)
 {
 	if (key == KEY_W || key == KEY_UP)
-		move_player(game, game->player_pos.x - 1, game->player_pos.y);
+		move_player(game, game->player_pos.x - 1, game->player_pos.y, BACK);
 	if (key == KEY_A || key == KEY_LEFT)
-		move_player(game, game->player_pos.x, game->player_pos.y - 1);
+		move_player(game, game->player_pos.x, game->player_pos.y - 1, LEFT);
 	if (key == KEY_S || key == KEY_DOWN)
-		move_player(game, game->player_pos.x + 1, game->player_pos.y);
+		move_player(game, game->player_pos.x + 1, game->player_pos.y, FRONT);
 	if (key == KEY_D || key == KEY_RIGHT)
-		move_player(game, game->player_pos.x, game->player_pos.y + 1);
+		move_player(game, game->player_pos.x, game->player_pos.y + 1, RIGHT);
 	if (key == KEY_Q || key == KEY_ESC)
 		close_game(game);
 	return (0);
 }
 
-void	move_player(t_game *game, int new_x, int new_y)
+void	move_player(t_game *game, int new_x, int new_y, int player_pos)
 {
 	int	last_x;
 	int	last_y;
 
+	game->player_sprite = player_pos;
 	last_x = game->player_pos.x;
 	last_y = game->player_pos.y;
 	if (game->map_copy[new_x][new_y] == WALL

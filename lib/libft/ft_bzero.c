@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/10 09:20:59 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/12 11:41:47 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/10 11:21:51 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/18 15:49:13 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *ptr, size_t n)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < n)
 	{
-		((unsigned char *)s)[i] = 0;
+		((unsigned char *)ptr)[i] = 0;
 		i++;
 	}
 }

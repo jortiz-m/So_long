@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 13:13:18 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/24 12:34:44 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/18 14:14:39 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/18 15:38:41 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,28 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
+	int	num;
+
 	if (n == -2147483648)
 		ft_putstr_fd("-2147483648", fd);
+	else if (n == 0)
+		write(fd, "0", sizeof(char));
+	else if (n > 9)
+	{
+		num = (n % 10) + '0';
+		n = n / 10;
+		ft_putnbr_fd(n, fd);
+		write(fd, &num, sizeof(char));
+	}
+	else if (n < 0)
+	{
+		write(fd, "-", sizeof(char));
+		n = -n;
+		ft_putnbr_fd(n, fd);
+	}
 	else
 	{
-		if (n < 0)
-		{
-			ft_putchar_fd('-', fd);
-			n = n * -1;
-		}
-		if (n >= 10)
-		{
-			ft_putnbr_fd(n / 10, fd);
-		}
-		ft_putchar_fd((n % 10) + '0', fd);
+		num = n + '0';
+		write(fd, &num, sizeof(char));
 	}
 }

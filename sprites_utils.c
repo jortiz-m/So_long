@@ -5,20 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 12:42:11 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/26 10:45:45 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/11/15 12:52:43 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_sprite(t_game *game)
+t_image	new_sprite(t_game *game, char *path, const char *entity)
 {
-	game->floor_img = new_sprite(game, "textures/floor.xpm", "Floor");
-	game->player_img = new_sprite(game, "textures/player.xpm", "Player");
-	game->coin_img = new_sprite(game, "textures/coin.xpm", "Coin");
-	game->exit_img = new_sprite(game, "textures/exit.xpm", "Exit");
-	game->wall_img = new_sprite(game, "textures/wall.xpm", "Wall");
+	t_image	sprite;
+
+	sprite.img = mlx_xpm_file_to_image(game->mlx, path, &sprite.x, &sprite.y);
+	if (!sprite.img)
+	{
+		destroy_images(game);
+		free_all(game);
+		error_msg(ft_strjoin("Couldn't find a sprite of ", entity));
+	}
+	return (sprite);
 }
 
 void	find_sprite(t_game *game, int y, int x)
@@ -33,9 +38,14 @@ void	find_sprite(t_game *game, int y, int x)
 	else if (coords == COIN)
 		render_sprite(game, game->coin_img, y, x);
 	else if (coords == EXIT)
-		render_sprite(game, game->exit_img, y, x);
+	{
+		if (game->entities.coin_counter == 0)
+			render_sprite(game, game->open_exit_img, y, x);
+		else
+			render_sprite(game, game->exit_img, y, x);
+	}
 	else if (coords == PLAYER)
-		render_sprite(game, game->player_img, y, x);
+		render_player (game, y, x);
 }
 
 void	render_sprite(t_game *game, t_image sprite, int line, int column)
@@ -44,16 +54,28 @@ void	render_sprite(t_game *game, t_image sprite, int line, int column)
 	column * TILE_SIZE, line * TILE_SIZE);
 }
 
-t_image	new_sprite(t_game *game, char *path, const char *entity)
+void	render_player(t_game *game, int y, int x)
 {
-	t_image	sprite;
+	if (game->player_sprite == FRONT)
+		render_sprite (game, game->player_front, y, x);
+	if (game->player_sprite == LEFT)
+		render_sprite (game, game->player_left, y, x);
+	if (game->player_sprite == RIGHT)
+		render_sprite (game, game->player_right, y, x);
+	if (game->player_sprite == BACK)
+		render_sprite (game, game->player_back, y, x);
+}
 
-	sprite.img = mlx_xpm_file_to_image(game->mlx, path, &sprite.x, &sprite.y);
-	if (!sprite.img)
-	{
-		destroy_images(game);
-		free_all(game);
-		error_msg(ft_strjoin("Couldn't find a sprite of ", entity));
-	}
-	return (sprite);
+void	init_sprites(t_game *game)
+{
+	game->floor_img = new_sprite(game, "images/floor.xpm", "Floor");
+	game->player_front = new_sprite(game, "images/player.xpm", "Player");
+	game->player_back = new_sprite(game, "images/back.xpm", "Player");
+	game->player_right = new_sprite(game, "images/right.xpm", "Player");
+	game->player_left = new_sprite(game, "images/left.xpm", "Player");
+	game->coin_img = new_sprite(game, "images/coin.xpm", "Coin");
+	game->exit_img = new_sprite(game, "images/exit.xpm", "Exit");
+	game->open_exit_img = new_sprite(game, "images/open_exit.xpm", "Exit");
+	game->wall_img = new_sprite(game, "images/wall.xpm", "Wall");
+	game->player_sprite = FRONT;
 }

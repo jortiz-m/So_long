@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 12:25:36 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/26 12:57:29 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/05/15 14:23:46 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/06/12 11:10:17 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 # include <fcntl.h>
 # include "lib/minilibx/mlx.h"
-# include "/usr/include/X11/X.h"
 # include "lib/libft/libft.h"
+# include <X11/X.h>
 
-# define TILE_SIZE 32
+# define TILE_SIZE 70
 
 // Entities definition
-# define FLOOR				'0'
-# define WALL				'1'
-# define PLAYER				'P'
-# define COIN				'C'
-# define EXIT				'E'
-# define VISITED			'V'
+# define FLOOR '0'
+# define WALL '1'
+# define PLAYER 'P'
+# define COIN 'C'
+# define EXIT 'E'
+# define VISITED 'V'
 
 // Movements key ASCII
 # define KEY_W				119
@@ -39,9 +39,13 @@
 # define KEY_RIGHT 			65363
 # define KEY_DOWN  			65364
 
-// Exit key ASCII
 # define KEY_Q				113
 # define KEY_ESC  			65307
+
+# define FRONT				1
+# define LEFT				2
+# define RIGHT				3
+# define BACK				4
 
 typedef struct s_entities
 {
@@ -69,9 +73,14 @@ typedef struct s_game
 	void		*win;
 	t_image		floor_img;
 	t_image		wall_img;
-	t_image		player_img;
+	t_image		player_front;
+	t_image		player_right;
+	t_image		player_left;
+	t_image		player_back;
+	int			player_sprite;
 	t_image		coin_img;
 	t_image		exit_img;
+	t_image		open_exit_img;
 	char		**map;
 	char		**map_copy;
 	int			map_width;
@@ -81,16 +90,7 @@ typedef struct s_game
 	t_entities	entities;
 }	t_game;
 
-// char_utils.c
-bool		check_len(char *str, size_t len);
-bool		check_strchr_gnl(char *str, char chr);
-int			count_char_in_str(char *str, char c);
-bool		all_chars_same(char *str, char c);
-
-//error_msg.c
-void		error_msg(char *msg);
-
-// map_validation.c
+// Map_validation.c
 void		map_validation(t_game *game, char *map);
 void		validate_extension(char *file);
 char		*txt_to_line(char *txt);
@@ -100,42 +100,43 @@ char		*process_txt(int fd);
 void		set_map_dimension(t_game *game);
 void		set_move_counter(t_game *game);
 void		set_map(t_game *game, char *file);
+void		check_line(char *super_line);
 
 // Validations.c
-void		validate_entities(t_entities *entities, char **lines);
-void		validate_edges(char **lines);
-void		validate_body(char **lines, t_entities *entities);
+void		validate_entities(t_entities *entities, t_game game);
+void		validate_edges(t_game game);
+void		validate_body(t_game game, t_entities *entities);
 bool		validate_walls(char *lines);
-bool		validate_len(char *str, size_t len);
+bool		validate_len(char *str, int len);
 
 // Validations_utils.c
 void		count_entities(char *line, t_entities *entities);
 void		find_player(char **map, t_coords *player_cords);
 void		flood_fill(int x, int y, t_entities *entities, char **map);
-void		reachable_entities(char **lines, t_entities entities, \
+void		reachable_entities(t_game *game, t_entities entities, \
 			t_coords p_coords);
 char		*gnl_cat(char *s1, char *s2);
 
 // so_long_init.c
 void		init_mlx(t_game *game);
-void		hooks_mlx(t_game *game);
 int			render_map(t_game *game);
 
 // sprite_utils.c
-void		init_sprite(t_game *game);
+void		init_sprites(t_game *game);
+t_image		new_sprite(t_game *game, char *path, const char *entity);
 void		find_sprite(t_game *game, int y, int x);
 void		render_sprite(t_game *game, t_image sprite, int line, int column);
-t_image		new_sprite(t_game *game, char *path, const char *entity);
+void		render_player(t_game *game, int y, int x);
 
 // handle_input.c
 int			handle_input(int key, t_game *game);
-void		move_player(t_game *game, int new_x, int new_y);
+void		move_player(t_game *game, int new_x, int new_y, int player_sprite);
 void		victory(t_game *game);
 int			close_game(t_game *game);
 void		print_movements(t_game *game);
 
 // free.c
-void		destroy_images(t_game *game);
 void		free_all(t_game *game);
+void		destroy_images(t_game *game);
 
 #endif

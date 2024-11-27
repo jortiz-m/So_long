@@ -5,16 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 11:59:06 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/11 12:00:22 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/09 11:09:34 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/09 11:09:59 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
-		c = c + 32;
-	return (c);
+		return (c + 32);
+	else
+		return (c);
 }

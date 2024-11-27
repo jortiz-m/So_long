@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 08:55:21 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/30 09:11:04 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/25 14:01:47 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/29 13:21:00 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*temp;
-	t_list	*start;
+	t_list	*lst_temp;
 
-	if (!lst || !del)
-		return ;
-	start = *lst;
-	while (start)
+	while (*lst != NULL)
 	{
-		temp = start->next;
-		del(start->content);
-		free(start);
-		start = temp;
+		lst_temp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = lst_temp;
 	}
 	*lst = NULL;
 }

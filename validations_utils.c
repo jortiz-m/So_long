@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 14:13:40 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/26 10:54:43 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/11/05 11:38:27 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,35 @@ void	count_entities(char *line, t_entities *entities)
 	entities->player_counter += count_char_in_str(line, PLAYER);
 	entities->exit_counter += count_char_in_str(line, EXIT);
 	entities->coin_counter += count_char_in_str(line, COIN);
+}
+
+char	*gnl_cat(char *s1, char *s2)
+{
+	char	*super_line;
+	int		i;
+	int		j;
+
+	if (!s1 && !s2)
+		return (NULL);
+	else if (s1 && !s2)
+		return (s1);
+	super_line = ft_calloc_gnl((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1), \
+	sizeof(char));
+	i = 0;
+	while (s1[i])
+	{
+		super_line[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (!s1[i] && s2[j])
+	{
+		super_line[i + j] = s2[j];
+		j++;
+	}
+	super_line[i + j] = '\0';
+	free(s1);
+	return (super_line);
 }
 
 void	find_player(char **map, t_coords *player_pos)
@@ -55,41 +84,12 @@ void	flood_fill(int x, int y, t_entities *entities, char **map)
 	flood_fill(x, y - 1, entities, map);
 }
 
-void	reachable_entities(char **lines, t_entities entities, t_coords p_coords)
+void	reachable_entities(t_game *game, t_entities entities, t_coords p_coords)
 {
-	flood_fill(p_coords.x, p_coords.y, &entities, lines);
+	flood_fill(p_coords.x, p_coords.y, &entities, game->map);
 	if (entities.coin_counter > 0 || entities.exit_counter != 2)
 	{
-		free_matrix(lines);
+		free_all(game);
 		error_msg("Error: No valid exit found or coins remaining");
 	}
-}
-
-char	*gnl_cat(char *s1, char *s2)
-{
-	char	*super_line;
-	int		i;
-	int		j;
-
-	if (!s1 && !s2)
-		return (NULL);
-	else if (s1 && !s2)
-		return (s1);
-	super_line = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), \
-	sizeof(char));
-	i = 0;
-	while (s1[i])
-	{
-		super_line[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (!s1[i] && s2[j])
-	{
-		super_line[i + j] = s2[j];
-		j++;
-	}
-	super_line[i + j] = '\0';
-	free(s1);
-	return (super_line);
 }

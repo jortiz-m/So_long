@@ -5,26 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 13:38:56 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/24 12:14:49 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/12 15:29:31 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/23 12:29:58 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t n, size_t size)
 {
-	char	*str;
-	size_t	i;
+	size_t			i;
+	size_t			bytvalue;
+	unsigned char	*ptr;
 
-	str = (malloc(count * size));
 	i = 0;
-	if (str == NULL)
+	bytvalue = n * size;
+	ptr = (unsigned char *) malloc(n * size);
+	if (ptr == NULL)
 		return (NULL);
-	while (i < (count * size))
+	while (i < bytvalue)
 	{
-		str[i] = 0;
+		ptr[i] = 0;
 		i++;
 	}
-	return (str);
+	return (ptr);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 12:41:39 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/26 10:44:28 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/11/11 13:37:47 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ void	init_mlx(t_game *game)
 		free_all(game);
 		error_msg("Error: mlx can't create a window");
 	}
-}
-
-void	hooks_mlx(t_game *game)
-{
-	mlx_hook(game->win, KeyPress, KeyPressMask, handle_input, game);
-	mlx_hook(game->win, DestroyNotify, ButtonPressMask, close_game, game);
-	mlx_hook(game->win, Expose, ExposureMask, render_map, game);
 }
 
 int	render_map(t_game *game)

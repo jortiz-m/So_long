@@ -5,107 +5,111 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 10:30:46 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/12 10:27:41 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/06/10 12:43:06 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_createrest(char *buffer)
+char	*ft_line_remaining(char *stat_buff)
 {
-	char	*rest;
+	char	*line;
 	int		i;
 	int		j;
 
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	while (stat_buff[i] && stat_buff[i] != '\n')
 		i++;
-	if (!buffer[i])
+	if (!stat_buff[i])
 	{
-		free(buffer);
+		free(stat_buff);
+		stat_buff = NULL;
 		return (NULL);
 	}
-	rest = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	line = ft_calloc_gnl((ft_strlen_gnl(stat_buff) - i + 1), sizeof(char));
 	i++;
 	j = 0;
-	while (buffer[i])
-	{
-		rest[j] = buffer[i];
-		i++;
-		j++;
-	}
-	free(buffer);
-	return (rest);
+	while (stat_buff[i])
+		line[j++] = stat_buff[i++];
+	free(stat_buff);
+	return (line);
 }
 
-char	*ft_createline(char *buffer)
+char	*ft_line(char *stat_buff)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	if (!buffer[i])
+	if (!stat_buff[i])
 		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
+	while (stat_buff[i] && stat_buff[i] != '\n')
 		i++;
-	line = ft_calloc (i + 2, sizeof(char));
+	line = ft_calloc_gnl(i + 2, sizeof(char));
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	while (stat_buff[i] && stat_buff[i] != '\n')
 	{
-		line [i] = buffer[i];
+		line[i] = stat_buff[i];
 		i++;
 	}
-	if (buffer[i] && buffer[i] == '\n')
+	if (stat_buff[i] && stat_buff[i] == '\n')
 	{
 		line[i] = '\n';
 		i++;
 	}
+	line[i] = '\0';
 	return (line);
 }
 
-char	*ft_read(int fd, char *rest)
+char	*ft_read_buffersize(int fd, char *stat_buff)
 {
 	char	*buffer;
-	int		bytes_read;
+	int		read_result;
 
-	if (!rest)
-		rest = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	bytes_read = 1;
-	while (bytes_read > 0)
+	if (!stat_buff)
+		stat_buff = ft_calloc_gnl(1, sizeof(char));
+	buffer = ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
+	read_result = 1;
+	while (read_result > 0)
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
+		read_result = read(fd, buffer, BUFFER_SIZE);
+		if (read_result < 0)
 		{
 			free(buffer);
 			buffer = NULL;
+			free(stat_buff);
+			stat_buff = NULL;
 			return (NULL);
 		}
-		buffer[bytes_read] = '\0';
-		rest = ft_strjoin(rest, buffer);
-		if (ft_strchr (buffer, '\n'))
+		buffer[read_result] = '\0';
+		stat_buff = ft_strjoin_gnl(stat_buff, buffer);
+		if (ft_strchr_gnl(buffer, '\n') == 1)
 			break ;
 	}
 	free(buffer);
-	return (rest);
+	return (stat_buff);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*stat_buff;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer = ft_read(fd, buffer);
-	if (!buffer || ft_strlen(buffer) < 1)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free(buffer);
-		buffer = NULL;
+		free(stat_buff);
+		stat_buff = NULL;
 		return (NULL);
 	}
-	line = ft_createline(buffer);
-	buffer = ft_createrest(buffer);
+	stat_buff = ft_read_buffersize(fd, stat_buff);
+	if (ft_strlen_gnl(stat_buff) < 1)
+	{
+		free(stat_buff);
+		stat_buff = NULL;
+		return (NULL);
+	}
+	line = ft_line(stat_buff);
+	stat_buff = ft_line_remaining(stat_buff);
 	return (line);
 }

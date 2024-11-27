@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 09:06:25 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/29 11:06:46 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/22 10:51:17 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/29 15:12:19 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*start;
+	t_list	*new;
 
-	start = malloc(sizeof(t_list));
-	if (!start)
-		return (0);
-	start ->content = content;
-	start ->next = 0;
-	return (start);
+	new = malloc(sizeof(t_list));
+	if (new == NULL)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

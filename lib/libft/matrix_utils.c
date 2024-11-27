@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix utils.c                                     :+:      :+:    :+:   */
+/*   matrix_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 10:29:14 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/26 10:49:49 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/10/14 12:47:34 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,24 @@ int	matrixlen(char **matrix)
 	while (matrix[i])
 		i++;
 	return (i);
+}
+
+void	print_matrix(char **matrix)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (matrix[x])
+	{
+		y = 0;
+		while (matrix[x][y])
+		{
+			printf("%c", matrix[x][y]);
+			y++;
+		}
+		printf("\n");
+		x++;
+	}
 }

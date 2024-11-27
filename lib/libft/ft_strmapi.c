@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 12:36:08 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/09/23 10:19:40 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/18 11:01:49 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/23 10:35:58 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
+
+/*Tenemos que utilizar el puntero a la función
+"f" que recibe los parametros unsigned int y char
+para utilizarlos en cada caracter de s.*/

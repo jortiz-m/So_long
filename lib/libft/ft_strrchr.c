@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 12:10:13 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/23 11:35:49 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/10 10:38:18 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/22 12:41:21 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strrchr(const char *str, int chr)
 	int	strlenght;
 
 	strlenght = ft_strlen(str);
+	if ((char)chr == '\0')
+		return ((char *)(str + ft_strlen(str)));
 	while (strlenght >= 0)
 	{
 		if (str[strlenght] == (char)chr)
@@ -25,3 +27,8 @@ char	*ft_strrchr(const char *str, int chr)
 	}
 	return (NULL);
 }
+
+/* 
+- We've casted the returned pointer because function
+request a pointer with char type.
+*/

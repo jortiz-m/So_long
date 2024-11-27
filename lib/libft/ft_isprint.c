@@ -5,16 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 12:42:07 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/12 11:51:16 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/09 11:51:51 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/22 12:12:51 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
 		return (1);
-	return (0);
+	else
+		return (0);
 }

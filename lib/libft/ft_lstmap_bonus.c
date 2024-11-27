@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 09:05:38 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/04/30 10:49:48 by jortiz-m         ###   ########.fr       */
+/*   Created: 2024/04/29 11:10:01 by jortiz-m          #+#    #+#             */
+/*   Updated: 2024/04/30 13:31:39 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*newlist;
-	t_list	*newelement;
+	t_list	*new_list;
+	t_list	*new_element;
 
-	if (!lst || !f)
+	if (lst == NULL)
 		return (NULL);
-	newlist = NULL;
-	while (lst)
+	new_list = NULL;
+	while (lst != NULL)
 	{
-		newelement = ft_lstnew(NULL);
-		if (!newelement)
+		new_element = ft_lstnew(NULL);
+		if (new_element == NULL)
 		{
-			ft_lstclear(&newlist, del);
+			ft_lstclear(&new_list, del);
 			return (NULL);
 		}
-		newelement -> content = f(lst -> content);
-		ft_lstadd_back(&newlist, newelement);
+		new_element->content = f(lst->content);
+		ft_lstadd_back(&new_list, new_element);
 		lst = lst->next;
 	}
-	return (newlist);
+	return (new_list);
 }

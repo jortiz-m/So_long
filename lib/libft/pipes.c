@@ -1,64 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_utils.c                                       :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 12:35:48 by jortiz-m          #+#    #+#             */
+/*   Created: 2024/10/14 12:52:07 by jortiz-m          #+#    #+#             */
 /*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-bool	check_len(char *str, int len)
+t_pipe	create_pipe(void)
 {
-	if (ft_strlen_gnl(str) != len)
-		return (false);
-	return (true);
-}
+	t_pipe	pipe_struct;
+	int		pipe_fd[2];
 
-int	count_char_in_str(char *str, char c)
-{
-	int	res;
-
-	res = 0;
-	if (check_strchr_gnl(str, c))
+	if (pipe(pipe_fd) == -1)
 	{
-		while (*str)
-		{
-			if (*str == c)
-				res++;
-			str++;
-		}
+		perror("Error creating a pipe");
+		exit(EXIT_FAILURE);
 	}
-	return (res);
-}
-
-bool	all_chars_same(char *str, char c)
-{
-	if (!str)
-		return (false);
-	while (*str)
-	{
-		if (*str != c && *str != '\n')
-			return (false);
-		str++;
-	}
-	return (true);
-}
-
-bool	check_strchr_gnl(char *str, char chr)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == chr)
-			return (true);
-		i++;
-	}
-	return (false);
+	pipe_struct.read_pipe = pipe_fd[0];
+	pipe_struct.write_pipe = pipe_fd[1];
+	return (pipe_struct);
 }
