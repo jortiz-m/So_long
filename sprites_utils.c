@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:52:43 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/11/28 12:07:12 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	render_player(t_game *game, int y, int x)
 void	init_sprites(t_game *game)
 {
 	game->floor_img = new_sprite(game, "images/floor.xpm", "Floor");
-	game->player_front = new_sprite(game, "images/player.xpm", "Player");
+	game->player_front = new_sprite(game, "images/front.xpm", "Player");
 	game->player_back = new_sprite(game, "images/back.xpm", "Player");
 	game->player_right = new_sprite(game, "images/right.xpm", "Player");
 	game->player_left = new_sprite(game, "images/left.xpm", "Player");
