@@ -27,6 +27,7 @@
 # define COIN 'C'
 # define EXIT 'E'
 # define VISITED 'V'
+# define INCOMPLETE 'X'
 
 // Movements key ASCII
 # define KEY_W				119
@@ -73,14 +74,15 @@ typedef struct s_game
 	void		*win;
 	t_image		floor_img;
 	t_image		wall_img;
+	t_image		incomplete_img;
 	t_image		player_front;
 	t_image		player_right;
 	t_image		player_left;
 	t_image		player_back;
+	t_image		open_exit_img;
 	int			player_sprite;
 	t_image		coin_img;
 	t_image		exit_img;
-	t_image		open_exit_img;
 	char		**map;
 	char		**map_copy;
 	int			map_width;
@@ -131,9 +133,12 @@ void		render_player(t_game *game, int y, int x);
 // handle_input.c
 int			handle_input(int key, t_game *game);
 void		move_player(t_game *game, int new_x, int new_y, int player_sprite);
+void		update_map(t_game *game, t_coords new, t_coords last);
+void		print_movements(t_game *game);
+
+//finish message
 void		victory(t_game *game);
 int			close_game(t_game *game);
-void		print_movements(t_game *game);
 
 // free.c
 void		free_all(t_game *game);

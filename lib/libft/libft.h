@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 15:22:19 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:39:15 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stddef.h>
 # include <stdbool.h>
 
-#define BUFFER_SIZE 2
+# define BUFFER_SIZE 2
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

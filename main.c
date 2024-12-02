@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:17:05 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:38:00 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ int	main(int ac, char **av)
 	}
 	else
 		error_msg("Error: diff params expected");
+	return (0);
 }

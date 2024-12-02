@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 11:21:46 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/27 14:06:04 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:38:00 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	map_validation(t_game *game, char *map_file)
 
 void	validate_extension(char *map)
 {
-	if (ft_strncmp(ft_strrchr(map, '.'), ".ber", 5))
+	char	*extension;
+
+	extension = ft_strrchr(map, '.');
+	if (!extension || ft_strncmp(extension, ".ber", 5))
 		error_msg("Error: not valid extension.");
 }
 
@@ -37,7 +40,7 @@ char	*txt_to_line(char *txt)
 
 	fd = open(txt, O_RDONLY);
 	if (fd == -1)
-		return (NULL);
+		error_msg("Error: map does not exist.");
 	super_line = process_txt(fd);
 	close(fd);
 	return (super_line);

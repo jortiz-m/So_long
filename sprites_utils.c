@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:52:43 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/11/28 12:07:12 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:40:23 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	find_sprite(t_game *game, int y, int x)
 		else
 			render_sprite(game, game->exit_img, y, x);
 	}
+	else if (coords == INCOMPLETE)
+		render_sprite(game, game->incomplete_img, y, x);
 	else if (coords == PLAYER)
 		render_player (game, y, x);
 }
@@ -77,5 +79,6 @@ void	init_sprites(t_game *game)
 	game->exit_img = new_sprite(game, "images/exit.xpm", "Exit");
 	game->open_exit_img = new_sprite(game, "images/open_exit.xpm", "Exit");
 	game->wall_img = new_sprite(game, "images/wall.xpm", "Wall");
+	game->incomplete_img = new_sprite(game, "images/incomplete.xpm", "NoCoin");
 	game->player_sprite = FRONT;
 }
