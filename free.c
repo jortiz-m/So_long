@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:54:04 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/12/02 11:38:00 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:57:53 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	destroy_images(t_game *game)
 		mlx_destroy_image(game->mlx, game->coin_img.img);
 	if (game->exit_img.img)
 		mlx_destroy_image(game->mlx, game->exit_img.img);
+	if (game->open_exit_img.img)
+		mlx_destroy_image(game->mlx, game->open_exit_img.img);
+	if (game->incomplete_img.img)
+		mlx_destroy_image(game->mlx, game->incomplete_img.img);
 }
 
 void	free_all(t_game *game)

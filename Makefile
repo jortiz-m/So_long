@@ -20,12 +20,7 @@ SO_LONG_SRC = main.c map_validation.c validations.c validations_utils.c set_map.
 # So long objects #
 SO_LONG_OBJ = $(addprefix obj/, $(SO_LONG_SRC:.c=.o))
 
-all: submodules $(NAME)
-
-submodules:
-	@git submodule init > /dev/null 2>/dev/null
-	@git submodule update > /dev/null 2>/dev/null
-	@echo "minilibx ready!"
+all: $(NAME)
 
 $(LIBFT):
 	@$(MAKE_LIB) -C $(LIBFT_DIR)
