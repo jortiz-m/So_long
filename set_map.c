@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:02:59 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/12/02 11:38:00 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/03 11:06:47 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ void	set_map_dimension(t_game *game)
 {
 	game->map_height = matrixlen(game->map);
 	game->map_width = ft_strlen_gnl(game->map[0]);
-}
-
-void	set_move_counter(t_game *game)
-{
-	game->move_counter = 0;
 }
 
 void	set_map(t_game *game, char *map_file)

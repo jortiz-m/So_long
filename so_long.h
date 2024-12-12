@@ -100,7 +100,6 @@ char		*process_txt(int fd);
 
 // set_map.c
 void		set_map_dimension(t_game *game);
-void		set_move_counter(t_game *game);
 void		set_map(t_game *game, char *file);
 void		check_line(char *super_line);
 

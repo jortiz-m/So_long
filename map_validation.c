@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 11:21:46 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/12/02 11:38:00 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/03 11:06:52 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	map_validation(t_game *game, char *map_file)
 	find_player(game->map, &game->player_pos);
 	reachable_entities(game, game->entities, game->player_pos);
 	set_map_dimension(game);
-	set_move_counter(game);
 }
 
 void	validate_extension(char *map)

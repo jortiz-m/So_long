@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 15:22:19 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/12/02 11:39:15 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:58:43 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	print_matrix(char **matrix);
 
 typedef struct s_pipe
 {
-	int read_pipe;
-	int write_pipe;
+	int	read_pipe;
+	int	write_pipe;
 }	t_pipe;
 
 #endif

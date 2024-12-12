@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:27:48 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/12/02 11:38:00 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/12/03 11:06:30 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	validate_body(t_game game, t_entities *entities)
 	int	len;
 	int	i;
 
-	entities->player_counter = 0;
-	entities->coin_counter = 0;
-	entities->exit_counter = 0;
 	len = ft_strlen_gnl(game.map[0]);
 	i = 1;
 	while (game.map[i])
